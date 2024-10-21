@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Duplicates</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #output {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Remove Duplicates from Array</h1>
+    <label for="inputArray">Enter numbers separated by commas:</label><br>
+    <input type="text" id="inputArray" placeholder="e.g., 1, 2, 3, 2, 1, 4, 5"><br><br>
+    <button id="removeDuplicatesBtn">Remove Duplicates</button>
+
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('removeDuplicatesBtn').addEventListener('click', function() {
+            const input = document.getElementById('inputArray').value;
+            const array = input.split(',').map(num => num.trim()).filter(num => num !== "");
+            const uniqueElements = [...new Set(array)];
+            document.getElementById('output').textContent = "Unique elements: " + uniqueElements.join(', ');
+        });
+    </script>
+
+</body>
+</html>

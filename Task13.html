@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram-login</title>
+    <style>
+      body{
+        background-color: aliceblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin :0;
+      }
+      .container{
+        background-color: aliceblue;
+        padding:20px;
+        border-radius: 5px;
+      }
+      h1{
+        text-align: center;
+      }
+      label{
+        display:block;
+        margin: 10px 0 5px;
+      }input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3897f0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #007bb5;
+}
+
+.error {
+    color: red;
+    text-align: center;
+}
+
+</style>
+</head>
+<body>
+    <div class ="container">
+        <h1>Instagram  Login</h1>
+        <form id="loginForm">
+            <div>
+                <label for="loginType">Login with:</label>
+                <select id="loginType" onchange="toggleInputFields()">
+                    <option value="email">Email</option>
+                    <option value="username">Username</option>
+                    <option value="mobile">Mobile Number</option>
+                </select>
+            </div>
+            <div>
+                <label for="loginInput">Enter Email/Username/Mobile:</label>
+                <input type="text" id="loginInput" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Login</button>
+            <p id="errorMessage" class="error"></p>
+        </form>
+    </div>
+    <script>
+        function toggleInputFields() {
+    const loginType = document.getElementById("loginType").value;
+    const loginInput = document.getElementById("loginInput");
+    loginInput.value = "";
+}
+
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const loginInput = document.getElementById("loginInput").value;
+    const password = document.getElementById("password").value;
+    const errorMessage = document.getElementById("errorMessage");
+    errorMessage.textContent = ""; 
+
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    const mobilePattern = /^\d{10}$/;
+    const usernamePattern = /^[A-Za-z]+$/; 
+
+    let isValid = true;
+
+    if (!passwordPattern.test(password)) {
+        errorMessage.textContent += "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one special symbol.\n";
+        isValid = false;
+    }
+
+    switch (document.getElementById("loginType").value) {
+        case "email":
+            if (!emailPattern.test(loginInput)) {
+                errorMessage.textContent += "Email must end with @gmail.com.\n";
+                isValid = false;
+            }
+            break;
+        case "username":
+            if (!usernamePattern.test(loginInput)) {
+                errorMessage.textContent += "Username should not have spaces or digits.\n";
+                isValid = false;
+            }
+            break;
+        case "mobile":
+            if (!mobilePattern.test(loginInput)) {
+                errorMessage.textContent += "Mobile number must be exactly 10 digits.\n";
+                isValid = false;
+            }
+            break;
+    }
+
+    if (isValid) {
+        alert("Login successful!"); 
+    }
+});
+
+    </script>
+</body>
+
+</html>

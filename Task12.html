@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Translation</title>
+    <style>
+        body{
+            background-color: aquamarine;
+            display: flex;
+            justify-content: center;
+            align-items:center;
+        }
+        .container {
+            text-align: center;
+            border-radius: 5px;
+            padding: 20px;
+            font-size: 1.5em;
+        }
+        .translated-text{
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class ="container">
+        <h1>Google Translation</h1>
+        <label for="language-select">Choose a language:</label>
+        <select id ="language-select">
+            <option value = "english">English</option>
+            <option value = "hindi">Hindi</option>
+            <option value = "telugu">Telugu</option>
+            <option value = "french">French</option>
+            <option value = "dutch">Dutch</option>
+            <option value = "Kannada">Kannada</option>
+            <option value = "tamil">Tamil</option>
+        </select>
+        <div id="translated-text" class="translated-text"><br/>A
+            Hi Welcome to Goggle Translation
+        </div>
+    </div>
+    <script>
+        document.getElementById('language-select').addEventListener('change',function(){
+        const selectedLanguage = this.value;
+        const textElement =   document.getElementById('translated-text'); 
+        switch(selectedLanguage){
+            case 'english':
+            textElement.textContent = 'Hi welcome to google translation';
+            break;
+        case 'hindi':
+            textElement.textContent = 'नमस्ते, Google अनुवाद में आपका स्वागत है';
+            break;
+        case 'french':
+            textElement.textContent = 'Bonjour, bienvenue dans la traduction de Google';
+            break;
+        case 'telugu':
+            textElement.textContent = 'హాయ్, గూగుల్ అనువాదంలో మీకు స్వాగతం';
+            break;
+        case 'dutch':
+            textElement.textContent = 'Hallo, welkom bij Google Translate';
+            break;
+        default:
+            textElement.textContent = 'Hi welcome to google translation';
+        }
+         }
+        );
+    </script>
+</body>
+</html>

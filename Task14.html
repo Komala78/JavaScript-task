@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timestamp Example</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.timestamp p {
+    margin: 5px 0;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Timestamp Example</h1>
+        <div class="timestamp">
+            <p><strong>Date:</strong> <span id="formattedDate"></span></p>
+            <p><strong>Time:</strong> <span id="formattedTime"></span></p>
+            <p><strong>Posted:</strong> <span id="relativeTime"></span></p>
+        </div>
+    </div>
+    <script>
+        // Function to format the date to dd/mm/yyyy
+function formatDate(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
+// Function to format the time to hh.mm.ss
+function formatTime(date) {
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    return `${hours}.${minutes}.${seconds}`;
+}
+
+// Function to calculate the relative time
+function timeAgo(date) {
+    const now = new Date();
+    const seconds = Math.floor((now - date) / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(seconds / 3600);
+    const days = Math.floor(seconds / 86400);
+    const months = Math.floor(seconds / 2592000); // Approx. seconds in a month
+    const years = Math.floor(seconds / 31536000); // Approx. seconds in a year
+
+    if (seconds < 60) return seconds === 1 ? '1 second ago' : `${seconds} seconds ago`;
+    if (minutes < 60) return minutes === 1 ? '1 minute ago' : `${minutes} minutes ago`;
+    if (hours < 24) return hours === 1 ? '1 hour ago' : `${hours} hours ago`;
+    if (days < 30) return days === 1 ? '1 day ago' : `${days} days ago`;
+    if (months < 12) return months === 1 ? '1 month ago' : `${months} months ago`;
+    return years === 1 ? '1 year ago' : `${years} years ago`;
+}
+
+// Set the current date and time
+const now = new Date();
+document.getElementById("formattedDate").textContent = formatDate(now);
+document.getElementById("formattedTime").textContent = formatTime(now);
+document.getElementById("relativeTime").textContent = timeAgo(now);
+
+    </script>
+</body>
+</html>

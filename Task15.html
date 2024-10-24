@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset password</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+h1 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3897f0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #007bb5;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    font-size: 0.9em;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reset Password</h1>
+        <form id="resetForm">
+            <div>
+                <label for="newPassword">New Password:</label>
+                <input type="password" id="newPassword" required oncopy="showMessage('copy')" onpaste="showMessage('paste')" oncut="showMessage('cut')">
+            </div>
+            <div>
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" required oncopy="showMessage('copy')" onpaste="showMessage('paste')" oncut="showMessage('cut')">
+            </div>
+            <button type="submit">Reset Password</button>
+            <p id="message" class="error"></p>
+        </form>
+    </div>
+    <script>
+        function showMessage(action) {
+    const messageElement = document.getElementById("message");
+    if (action === 'copy') {
+        messageElement.textContent = "Copy is restricted.";
+    } else if (action === 'paste') {
+        messageElement.textContent = "Paste is restricted.";
+    } else if (action === 'cut') {
+        messageElement.textContent = "Cut is restricted.";
+    }
+}
+
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+    </script>
+</body>
+</html>
